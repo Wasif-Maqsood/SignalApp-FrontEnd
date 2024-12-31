@@ -1,0 +1,397 @@
+.home-container {
+  padding: 24px;
+  min-height: 100vh;
+  background: transparent;
+}
+
+.dashboard-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(93.42deg, #FFFFFF -13.46%, #E0E0FF 102.15%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.coins-panel, .chart-panel {
+  background: rgba(23, 23, 23, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coins-panel {
+  padding: 24px;
+  height: fit-content;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panel-header h2 {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.more-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.more-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.coins-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.coin-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.coin-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.coin-item.active {
+  background: rgba(123, 63, 228, 0.1);
+  border-color: rgba(123, 63, 228, 0.3);
+}
+
+.coin-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: rgba(123, 63, 228, 0.1);
+  color: #7B3FE4;
+  transition: all 0.3s ease;
+}
+
+.coin-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coin-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.coin-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.coin-symbol {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.coin-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.market-share {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.price-change {
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.price-change.positive {
+  color: #00f7a1;
+  background: rgba(0, 247, 161, 0.1);
+}
+
+.price-change.negative {
+  color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.1);
+}
+
+.chart-panel {
+  padding: 24px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.chart-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.chart-title span {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.price-tag {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.timeframe-selector {
+  display: flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.timeframe-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.timeframe-button:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.timeframe-button.active {
+  background: #7B3FE4;
+  color: #fff;
+}
+
+.chart-container {
+  height: 400px;
+  background: rgba(23, 23, 23, 0.4);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+}
+
+@media (max-width: 1400px) {
+  .dashboard-grid {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .coins-panel {
+    height: auto;
+  }
+
+  .coins-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .chart-container {
+    height: 300px;
+    padding: 16px;
+  }
+
+  .timeframe-selector {
+    width: 100%;
+    overflow-x: auto;
+    padding: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .coins-list {
+    grid-template-columns: 1fr;
+  }
+
+  .coin-item {
+    padding: 12px;
+  }
+
+  .coin-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .chart-container {
+    height: 250px;
+    padding: 12px;
+  }
+}
+/* Keep all the CSS you provided, but add these specific updates */
+
+.dashboard-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+.dashboard-container {
+  margin-top: 70px;
+  flex: 1;
+  width: 100%;
+}
+
+.home-container {
+  padding: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Add these media queries at the end of your CSS file */
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .coins-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .chart-container {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 16px;
+  }
+
+  .nav-brand span {
+    display: none;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .timeframe-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .nav-button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .coins-list {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+
+  .timeframe-button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}

@@ -19,7 +19,8 @@ const Navbar: React.FC<{ logo: string }> = ({ logo }) => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src={logo} alt="Signal Bot Logo" />
+          <img src={logo} alt="Signal Bot" />
+          <span className="logo-text">Signal Bot</span>
         </Link>
 
         <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
@@ -29,9 +30,12 @@ const Navbar: React.FC<{ logo: string }> = ({ logo }) => {
             <Link to="/demo" className="nav-link">Demo</Link>
             <Link to="/testimonials" className="nav-link">Testimonials</Link>
             <Link to="/news" className="nav-link">News</Link>
-            <Link to="/login" className="nav-link login">Login</Link>
-            <Link to="/getting-started" className="nav-link cta">Get Started</Link>
           </div>
+        </div>
+
+        <div className="nav-buttons">
+          <Link to="/login" className="nav-link login">Login</Link>
+          <Link to="/register" className="nav-link getting-started">Getting Started</Link>
         </div>
 
         <button 

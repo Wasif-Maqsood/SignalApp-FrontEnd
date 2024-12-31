@@ -1,7 +1,9 @@
-import React from 'react';
-import './css/WhyChooseUs.css'
+import React, { useState, useEffect } from 'react';
+import './css/WhyChooseUs.css';
 
 const WhyChooseUs: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const features = [
     {
       title: 'ACCURATE SIGNALS',
@@ -21,16 +23,32 @@ const WhyChooseUs: React.FC = () => {
     }
   ];
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % features.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const ChartIcon = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M3 9l4-4 4 4 4-4 4 4" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M3 15l4-4 4 4 4-4 4 4" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+
   return (
     <section className="why-choose-us">
       <h2>WHY CHOOSE US?</h2>
       <div className="features-grid">
         {features.map((feature, index) => (
-          <div key={index} className="feature-card">
+          <div 
+            key={index} 
+            className={`feature-card ${index === activeIndex ? 'active' : ''}`}
+          >
             <div className="feature-icon">
-              <svg viewBox="0 0 24 24" width="24" height="24">
-                <path fill="currentColor" d="M3 3h18v18H3V3zm16 16V5H5v14h14z"/>
-              </svg>
+              <ChartIcon />
             </div>
             <h3>{feature.title}</h3>
             <p>{feature.description}</p>

@@ -1,0 +1,113 @@
+.footer {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 60px 0 20px;
+    color: #fff;
+  }
+  
+  .footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  
+  .footer-logo {
+    flex: 1;
+  }
+  
+  .footer-logo img {
+    height: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-logo p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+  }
+  
+  .footer-links {
+    flex: 2;
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+  }
+  
+  .footer-column h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .footer-column a {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-column a:hover {
+    color: #a855f7;
+  }
+  
+  .subscribe-form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .subscribe-form input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    outline: none;
+  }
+  
+  .subscribe-form button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .subscribe-form button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+  
+  .footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .footer-links {
+      flex-direction: column;
+      gap: 30px;
+    }
+  
+    .subscribe-form {
+      justify-content: center;
+    }
+  }
+  

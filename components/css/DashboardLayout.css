@@ -1,0 +1,213 @@
+.dashboard-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top-navbar {
+    height: 70px;
+    background: rgba(23, 23, 23, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .nav-brand img {
+    height: 32px;
+  }
+  
+  .nav-brand span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 32px;
+  }
+  
+  .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #fff;
+  }
+  
+  .nav-link.active {
+    color: #fff;
+  }
+  
+  .nav-actions {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .nav-button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-button.primary {
+    background: #7B3FE4;
+    border: none;
+  }
+  
+  .nav-button.primary:hover {
+    background: #8B4FE4;
+  }
+  
+  .dashboard-container {
+    display: flex;
+    margin-top: 70px;
+    flex: 1;
+  }
+  
+  .sidebar {
+    width: 260px;
+    background: rgba(23, 23, 23, 0.8);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 24px 16px;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    bottom: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar.collapsed {
+    width: 80px;
+  }
+  
+  .sidebar-toggle {
+    position: absolute;
+    right: -12px;
+    top: 20px;
+    width: 24px;
+    height: 24px;
+    background: #7B3FE4;
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+  
+  .menu-item.active {
+    background: rgba(123, 63, 228, 0.1);
+    color: #7B3FE4;
+  }
+  
+  .menu-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+  }
+  
+  .sidebar.collapsed .menu-item span {
+    display: none;
+  }
+  
+  .dashboard-content {
+    flex: 1;
+    margin-left: 260px;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar.collapsed + .dashboard-content {
+    margin-left: 80px;
+  }
+  
+  @media (max-width: 1024px) {
+    .nav-links {
+      display: none;
+    }
+  
+    .sidebar {
+      transform: translateX(-100%);
+    }
+  
+    .sidebar.collapsed {
+      transform: translateX(0);
+      width: 260px;
+    }
+  
+    .dashboard-content {
+      margin-left: 0;
+    }
+  
+    .sidebar.collapsed + .dashboard-content {
+      margin-left: 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .nav-brand span {
+      display: none;
+    }
+  
+    .nav-actions {
+      gap: 8px;
+    }
+  
+    .nav-button {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+  }
+  
