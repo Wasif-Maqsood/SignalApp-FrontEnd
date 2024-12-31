@@ -1,35 +1,55 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './css/Register.css';
 import NetworkAnimation from './NetworkAnimation';
 
 const Register: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    if (error) setError('');
+  };
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     
-    if (password !== confirmPassword) {
+    if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long');
       return;
     }
 
     setIsLoading(true);
     try {
-      const response = await axios.post('https://127.0.0.1:8000/api/register/', { 
-        email, 
-        password 
+      const response = await axios.post('https://127.0.0.1:8000/api/register/', {
+        email: formData.email,
+        password: formData.password
       });
-      if (response.data.success) {
+
+      if (response.data?.message === 'OTP sent to email') {
         setOtpSent(true);
+      } else {
+        setError('Registration failed. Please try again.');
       }
     } catch (error: any) {
       setError(error.response?.data?.message || 'Registration failed');
@@ -40,18 +60,58 @@ const Register: React.FC = () => {
 
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setError('');
+    setIsLoading(true);
+
     try {
-      const response = await axios.post('https://127.0.0.1:8000/api/verify-otp', { 
-        email, 
-        otp 
+      const response = await axios.post('https://127.0.0.1:8000/api/verify-otp/', {
+        email: formData.email,
+        password: formData.password,
+        otp: parseInt(otp) // Convert OTP to integer as expected by backend
       });
-      if (response.data.success) {
-        window.location.href = '/login';
+
+      // Check if we received the tokens
+      if (response.data?.access && response.data?.refresh) {
+        // Store tokens
+        localStorage.setItem('access_token', response.data.access);
+        localStorage.setItem('refresh_token', response.data.refresh);
+        
+        // Show success message
+        alert('Registration successful!');
+        
+        // Redirect to home page
+        navigate('/home');
+      } else {
+        setError('Verification failed. Please try again.');
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || 'OTP verification failed');
+      if (error.response?.status === 400) {
+        setError('Invalid OTP. Please try again.');
+      } else {
+        setError('Verification failed. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post('https://127.0.0.1:8000/api/register/', {
+        email: formData.email,
+        password: formData.password,
+        resend: true
+      });
+
+      if (response.data?.message === 'OTP sent to email') {
+        alert('New OTP has been sent to your email');
+        setOtp(''); // Clear previous OTP
+      } else {
+        setError('Failed to resend OTP');
+      }
+    } catch (error: any) {
+      setError('Failed to resend OTP');
     } finally {
       setIsLoading(false);
     }
@@ -62,7 +122,7 @@ const Register: React.FC = () => {
       const response = await axios.get('https://127.0.0.1:8000/api/google-login/');
       window.location.href = response.data.authorization_url;
     } catch (error) {
-      console.error('Google login error:', error);
+      setError('Failed to initialize Google login');
     }
   };
 
@@ -71,8 +131,12 @@ const Register: React.FC = () => {
       <NetworkAnimation />
       <div className="register-box">
         <div className="register-header">
-          <h1>Create Account</h1>
-          <p>Join the future of crypto trading</p>
+          <h1>{otpSent ? 'Verify OTP' : 'Create Account'}</h1>
+          <p>
+            {otpSent 
+              ? 'Enter the OTP sent to your email' 
+              : 'Join the future of crypto trading'}
+          </p>
         </div>
 
         {!otpSent ? (
@@ -81,9 +145,10 @@ const Register: React.FC = () => {
               <div className="input-group">
                 <input
                   type="email"
+                  name="email"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder=" "
                 />
                 <label>Email Address</label>
@@ -99,9 +164,10 @@ const Register: React.FC = () => {
               <div className="input-group">
                 <input
                   type="password"
+                  name="password"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleInputChange}
                   placeholder=" "
                   minLength={8}
                 />
@@ -118,9 +184,10 @@ const Register: React.FC = () => {
               <div className="input-group">
                 <input
                   type="password"
+                  name="confirmPassword"
                   required
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
                   placeholder=" "
                   minLength={8}
                 />
@@ -166,9 +233,14 @@ const Register: React.FC = () => {
                   type="text"
                   required
                   value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                    setOtp(value);
+                    if (error) setError('');
+                  }}
                   placeholder=" "
                   maxLength={6}
+                  pattern="\d{6}"
                 />
                 <label>Enter OTP</label>
                 <div className="input-icon">
@@ -187,6 +259,15 @@ const Register: React.FC = () => {
               disabled={isLoading}
             >
               {isLoading ? <div className="loader"></div> : 'Verify OTP'}
+            </button>
+
+            <button 
+              type="button" 
+              className="resend-button"
+              onClick={handleResendOtp}
+              disabled={isLoading}
+            >
+              Resend OTP
             </button>
           </form>
         )}
