@@ -1,0 +1,55 @@
+.why-choose-us {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1f3d 100%);
+    text-align: center;
+  }
+  
+  .why-choose-us h2 {
+    color: white;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .feature-icon {
+    color: #a855f7;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-card h3 {
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .feature-card p {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 768px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  

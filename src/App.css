@@ -1,0 +1,241 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: linear-gradient(135deg, #440495 0%, #B102CD 100%);
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(9, 11, 18, 0.85);
+  z-index: 1;
+}
+
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.main-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  position: relative;
+  width: 100%;
+  padding: 120px 80px 80px;
+  align-items: center;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 650px;
+}
+
+.text-content h1 {
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-weight: 700;
+  background: linear-gradient(93.42deg, #FFFFFF -13.46%, #E0E0FF 102.15%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-content p {
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 48px;
+  max-width: 540px;
+}
+
+.primary-button {
+  background: linear-gradient(93.42deg, #C94B32 -13.46%, #A54332 102.15%);
+  color: #fff;
+  padding: 18px 36px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: clamp(16px, 1.5vw, 18px);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  max-width: fit-content;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(201, 75, 50, 0.2);
+}
+
+.image-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+}
+
+/* Background effects */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.background-animation::before {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  left: -200px;
+  top: -100px;
+  background: radial-gradient(50% 50% at 50% 50%, 
+    rgba(177, 2, 205, 0.3) 0%, 
+    rgba(177, 2, 205, 0) 100%);
+  filter: blur(100px);
+}
+
+.background-animation::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  right: -200px;
+  bottom: -100px;
+  background: radial-gradient(50% 50% at 50% 50%, 
+    rgba(68, 4, 149, 0.3) 0%, 
+    rgba(68, 4, 149, 0) 100%);
+  filter: blur(100px);
+}
+
+/* Glass effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-content > * {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.text-content h1 {
+  animation-delay: 0.2s;
+}
+
+.text-content p {
+  animation-delay: 0.4s;
+}
+
+.text-content button {
+  animation-delay: 0.6s;
+}
+
+.image-content {
+  animation: fadeIn 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+/* Responsive design */
+@media (max-width: 1400px) {
+  .main-content {
+    padding: 120px 60px 60px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .main-content {
+    padding: 100px 40px 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .text-content h1 {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    padding: 100px 24px 40px;
+    gap: 40px;
+  }
+
+  .text-content {
+    text-align: center;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .text-content p {
+    max-width: 100%;
+  }
+
+  .image-content {
+    justify-content: center;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 80px 16px 32px;
+  }
+
+  .text-content h1 {
+    font-size: 36px;
+  }
+
+  .text-content p {
+    font-size: 16px;
+  }
+
+  .primary-button {
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+}
