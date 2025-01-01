@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import logo from './assets/signal-x-logo.svg';
 import dashboard1 from './assets/signal-executive-logo.svg';
-import dashboard2 from './assets/chart-1.jpg';
-import dashboard3 from './assets/chart-1.jpg';
 import Carousel from '../components/Carousel';
 import Navbar from '../components/Navbar';
 import WhyChooseUs from '../components/WhyChooseUs';
@@ -16,9 +14,7 @@ const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const dashboardImages = [
-    dashboard1,
-    dashboard2,
-    dashboard3
+    dashboard1
   ];
 
   return (
